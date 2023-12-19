@@ -1,0 +1,42 @@
+
+
+<h2 mat-dialog-title>{{operacion}} Categoría</h2>
+
+
+<form [formGroup]="form" (ngSubmit)="addEditCategoria()">
+  <mat-dialog-content>
+
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input
+            formControlName="nombre"
+            matInput
+            placeholder="Ingrese el nombre"
+            autocomplete="off"
+          />
+        </mat-form-field>
+
+
+        <div class="error">
+          <samp *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+            El nombre es un campo <strong>requerido</strong>
+          </samp>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button [disabled]="form.invalid" type="submit" mat-button cdkFocusInitial>
+      Aceptar
+    </button>
+  </mat-dialog-actions>
+</form>

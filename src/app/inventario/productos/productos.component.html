@@ -1,0 +1,77 @@
+<div class="container">
+  <mat-toolbar>
+    <span>PRODUCTOS</span>
+    <div class="example-spacer"></div>
+      <button (click)="addEditProductos()" mat-raised-button color="primary" style="text-align: right">Agregar</button>
+  </mat-toolbar>
+
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+  <mat-form-field>
+    <mat-label>Filtro</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. ium"
+      #input
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por número">
+          No.
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+
+      <!-- CategoriaID Column -->
+      <ng-container matColumnDef="CategoriaID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
+        <td mat-cell *matCellDef="let element">{{ element.CategoriaNombre }}</td>
+      </ng-container>
+
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.Nombre }}</td>
+      </ng-container>
+
+      <!-- Precio Column -->
+      <ng-container matColumnDef="Precio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+        <td mat-cell *matCellDef="let element">{{ element.Precio }}</td>
+      </ng-container>
+
+      <!-- Stock Column -->
+      <ng-container matColumnDef="Stock">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock</th>
+        <td mat-cell *matCellDef="let element">{{ element.Stock }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" style="text-align: right">
+          <a class="pointer" (click)="addEditProductos(element.ProductoID)" style="color: #223cac" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </a>
+          <a class="pointer" (click)="eliminarProducto(element.ProductoID)" style="color: #c02a4b" matTooltip="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Seleccionar página de productos"
+    ></mat-paginator>
+  </div>
+</div>

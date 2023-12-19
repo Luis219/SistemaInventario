@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>{{operacion}} Movimiento</h2>
+
+<form [formGroup]="form" (ngSubmit)="addEditMovimiento()">
+  <mat-dialog-content>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label >Producto</mat-label>
+          <mat-select formControlName="ProductoID" placeholder="Seleccione un producto">
+            <mat-option *ngFor="let producto of productos" [value]="producto.ProductoID">
+              {{ producto.Nombre }} 
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Cantidad</mat-label>
+          <input
+            formControlName="Cantidad"
+            matInput
+            placeholder="Ingrese la cantidad"
+            autocomplete="off"
+          />
+
+        </mat-form-field>
+        <div class="error" *ngIf="form.get('Cantidad')?.invalid && form.get('Cantidad')?.touched">
+          La cantidad es un campo <strong>requerido</strong>
+        </div>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Movimiento</mat-label>
+          <input 
+            formControlName="FechaMovimiento"
+            matInput
+            placeholder="Ingrese la fecha de movimiento"
+            autocomplete="off"
+          />
+
+        </mat-form-field>
+        <div class="error" *ngIf="form.get('FechaMovimiento')?.invalid && form.get('FechaMovimiento')?.touched">
+          La fecha de movimiento es un campo <strong>requerido</strong>
+        </div>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo de Movimiento</mat-label>
+          <mat-select formControlName="TipoMovimiento">
+            <mat-option value="Entrada">Entrada</mat-option>
+            <mat-option value="Salida">Salida</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+        <div class="error" *ngIf="form.get('TipoMovimiento')?.invalid && form.get('TipoMovimiento')?.touched">
+          El tipo de movimiento es un campo <strong>requerido</strong>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button [disabled]="form.invalid" type="submit" mat-button cdkFocusInitial>
+      Aceptar
+    </button>
+  </mat-dialog-actions>
+</form>

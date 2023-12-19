@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+th{
+  width: 19%;
+}
+
+
+.pointer {
+  cursor: pointer;
+}
+
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
